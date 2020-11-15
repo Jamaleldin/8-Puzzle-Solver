@@ -15,12 +15,14 @@ public class BFS implements IPathFinder {
     private IUtilities utilities;
     private int depth;
     private long time;
+    private int cost;
 
     public BFS() {
         visitedStates = new ArrayList<>();
         frontier = new LinkedList<>();
         utilities = new Utilities();
         depth = 0;
+        cost = 0;
     }
 
     @Override
@@ -31,19 +33,22 @@ public class BFS implements IPathFinder {
 
 //        initiate the frontier with the initial state
         frontier = new LinkedList<>();
-        frontier.add(new Node(initialState));
+        frontier.add(new Node(initialState, 0));
         visitedStates = new ArrayList<>();
 
         while (!frontier.isEmpty()) {
 //            poll from the queue
             INode state = frontier.poll();
+            depth = ((Node) state).getDepth();
             visitedStates.add(state.getItem());
 
 //            check for goal
             if (utilities.goalTest(state.getItem())) {
 //                that's it
                 time = new Date().getTime() - time;
-                return utilities.getPath(state);
+                ArrayList<int[]> path = utilities.getPath(state);
+                cost = path.size();
+                return path;
             }
 
             ArrayList<int[]> neighbors = utilities.getNeighbors(state.getItem());
@@ -53,7 +58,7 @@ public class BFS implements IPathFinder {
                 boolean inVisited = utilities.checkStateVisited(neighbor, visitedStates);
 
                 if (!inFrontier && !inVisited) {
-                    INode nextNeighbor = new Node(neighbor);
+                    INode nextNeighbor = new Node(neighbor, depth + 1);
                     nextNeighbor.setPrev(state);
                     frontier.add(nextNeighbor);
                 }
@@ -66,7 +71,7 @@ public class BFS implements IPathFinder {
 
     @Override
     public int CostOfPath() {
-        return 0;
+        return cost;
     }
 
     @Override
@@ -76,7 +81,7 @@ public class BFS implements IPathFinder {
 
     @Override
     public int depthOfsearch() {
-        return 0;
+        return depth;
     }
 
     @Override

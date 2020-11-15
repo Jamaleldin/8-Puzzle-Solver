@@ -15,6 +15,7 @@ public class DFS implements IPathFinder {
 	private Stack<INode> frontier;
 	private IUtilities utilities;
 
+
 	DFS() {
 		visitedStates = new ArrayList<int[]>();
 		frontier = new Stack<INode>();
@@ -22,7 +23,7 @@ public class DFS implements IPathFinder {
 	}
 
 	@Override
-	public ArrayList<int[]> findPath(int[] initialState) {
+	public ArrayList<int[]> findPath(int[] initialState, String options) {
 		visitedStates.clear();
 		frontier.clear();
 		frontier.push(new Node(initialState));

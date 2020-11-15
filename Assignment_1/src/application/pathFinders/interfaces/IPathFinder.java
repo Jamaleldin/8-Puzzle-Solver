@@ -10,7 +10,7 @@ public interface IPathFinder {
 	 *            array of index indicates the given puzzle
 	 * @return an array list contains the shortest states from initial to goal
 	 */
-	public ArrayList<int[]> findPath(int[] initialState);
+	public ArrayList<int[]> findPath(int[] initialState, String options);
 
 	/**
 	 * counting the number of moves done from initial state to the goal

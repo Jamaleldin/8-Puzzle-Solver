@@ -1,6 +1,9 @@
 package application.pathFinders.interfaces;
 
+import application.pathFinders.Entry;
+
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -13,6 +16,15 @@ public interface IUtilities {
 	 * @return ArrayList contains the surrounded neighbors to the current state
 	 */
 	public ArrayList<int[]> getNeighbors(int[] state);
+
+	/**
+	 * find the surrounded reachable neighbors to the current state
+	 *
+	 * @param state:
+	 *            array of integers indicates the current state
+	 * @return ArrayList contains the surrounded neighbors to the current state
+	 */
+	public ArrayList<Entry> getNeighbors(Entry state, String option);
 
 	/**
 	 * swap the current number with the given direction
@@ -38,6 +50,18 @@ public interface IUtilities {
 	 * @return true if neighbor in the list false if not found
 	 */
 	public boolean checkStateStack(int[] neighbor, Stack<INode> frontier);
+
+	/**
+	 * check if the given neighbor in the priority queue or not
+	 *
+	 * @param neighbor:
+	 *            array of integers indicates the current neighbor
+	 * @param frontier:
+	 *            the frontier list that contains the nodes to be expanded in the
+	 *            A*
+	 * @return true if neighbor in the list false if not found
+	 */
+	public boolean checkStatePQ(int[] neighbor, PriorityQueue<Entry> frontier);
 
 	/**
 	 * check if the given neighbor in the queue or not
@@ -80,4 +104,6 @@ public interface IUtilities {
 	 * @return ArrayList holds the states from initial to end
 	 */
 	public ArrayList<int[]> getPath(INode node);
+
+	int getMnhatnCost(int[] initialState, int[] goalState);
 }

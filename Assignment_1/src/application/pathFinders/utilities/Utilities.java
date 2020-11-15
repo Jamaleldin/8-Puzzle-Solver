@@ -1,12 +1,14 @@
 package application.pathFinders.utilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Queue;
-import java.util.Stack;
+import java.awt.*;
+import java.util.*;
 
+import application.pathFinders.Entry;
 import application.pathFinders.interfaces.INode;
 import application.pathFinders.interfaces.IUtilities;
+
+import static java.lang.Math.*;
+import static java.lang.Math.pow;
 
 public class Utilities implements IUtilities {
 	private int[] goalState = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -33,6 +35,57 @@ public class Utilities implements IUtilities {
 
 				if (!Arrays.equals(upNeighbor, state))
 					neighbors.add(upNeighbor);
+			}
+		}
+		return neighbors;
+	}
+
+	@Override
+	public ArrayList<Entry> getNeighbors(Entry state, String options) {
+		ArrayList<Entry> neighbors = new ArrayList< Entry>();
+
+		for (int i = 0; i < state.getValue().length; i++) {
+			int [] stateVal = state.getValue();
+			if (stateVal[i] == 0) {
+				int[] rightNeighbor = swapElements(stateVal, i, "right");
+				int[] downNeighbor = swapElements(stateVal, i, "down");
+				int[] leftNeighbor = swapElements(stateVal, i, "left");
+				int[] upNeighbor = swapElements(stateVal, i, "up");
+
+				if (!Arrays.equals(rightNeighbor, stateVal)){
+					int cost = options == "mnhatn" ?
+							getMnhatnCost(stateVal,rightNeighbor)+
+							getMnhatnCost(rightNeighbor,goalState):
+							getEucCost(stateVal,rightNeighbor)+getEucCost(rightNeighbor,goalState);
+					neighbors.add(new Entry(cost,rightNeighbor));
+				}
+
+				if (!Arrays.equals(downNeighbor, stateVal)){
+					int cost = options == "mnhatn" ?
+							getMnhatnCost(stateVal,downNeighbor)+
+									getMnhatnCost(downNeighbor,goalState):
+							getEucCost(stateVal,downNeighbor)+getEucCost(downNeighbor,goalState);
+					neighbors.add(new Entry(cost,downNeighbor));
+				}
+
+
+				if (!Arrays.equals(leftNeighbor, stateVal)){
+					int cost = options == "mnhatn" ?
+							getMnhatnCost(stateVal,leftNeighbor)+
+									getMnhatnCost(leftNeighbor,goalState):
+							getEucCost(stateVal,leftNeighbor)+getEucCost(leftNeighbor,goalState);
+					neighbors.add(new Entry(cost,leftNeighbor));
+				}
+
+
+				if (!Arrays.equals(upNeighbor, stateVal)){
+					int cost = options == "mnhatn" ?
+							getMnhatnCost(stateVal,upNeighbor)+
+									getMnhatnCost(upNeighbor,goalState):
+							getEucCost(stateVal,upNeighbor)+getEucCost(upNeighbor,goalState);
+					neighbors.add(new Entry(cost,upNeighbor));
+				}
+
 			}
 		}
 		return neighbors;
@@ -80,6 +133,16 @@ public class Utilities implements IUtilities {
 	}
 
 	@Override
+	public boolean checkStatePQ(int[] neighbor, PriorityQueue<Entry> frontier) {
+		for (Entry arr : frontier) {
+			if (Arrays.equals(arr.getItem(), neighbor)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean checkStateQueue(int[] neighbor, Queue<INode> frontier) {
 		for (INode arr : frontier) {
 			if (Arrays.equals(arr.getItem(), neighbor)) {
@@ -112,5 +175,29 @@ public class Utilities implements IUtilities {
 			node = node.getPrev();
 		}
 		return path;
+	}
+
+	public int getMnhatnCost(int[] current, int[] goal){
+		int result = 0;
+		for(int i = 0; i<9; i++){
+			Point currentPos = position(current[i]);
+			Point goalPos = position(goal[i]);
+			result += abs(currentPos.x - goalPos.x) + abs(currentPos.y - goalPos.y);
+		}
+		return result;
+	}
+
+	public int getEucCost(int [] current, int [] goal){
+		int result = 0;
+		for(int i = 0; i<9; i++){
+			Point currentPos = position(current[i]);
+			Point goalPos = position(goal[i]);
+			result += sqrt(pow(currentPos.x - goalPos.x,2) + pow(currentPos.y - goalPos.y,2));
+		}
+		return result;
+	}
+
+	private Point position(int index){
+		return new Point(index/3,index%3);
 	}
 }

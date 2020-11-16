@@ -20,7 +20,7 @@ public interface IUtilities {
 	/**
 	 * find the surrounded reachable neighbors to the current state
 	 *
-	 * @param state:
+	 * @param state :
 	 *            array of integers indicates the current state
 	 * @return ArrayList contains the surrounded neighbors to the current state
 	 */
@@ -106,4 +106,5 @@ public interface IUtilities {
 	public ArrayList<int[]> getPath(INode node);
 
 	int getMnhatnCost(int[] initialState, int[] goalState);
+
 }

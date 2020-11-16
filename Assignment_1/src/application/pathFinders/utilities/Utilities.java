@@ -57,7 +57,7 @@ public class Utilities implements IUtilities {
 							getMnhatnCost(stateVal,rightNeighbor)+
 							getMnhatnCost(rightNeighbor,goalState):
 							getEucCost(stateVal,rightNeighbor)+getEucCost(rightNeighbor,goalState);
-					neighbors.add(new Entry(cost,rightNeighbor));
+					neighbors.add(new Entry(cost,rightNeighbor ));
 				}
 
 				if (!Arrays.equals(downNeighbor, stateVal)){
@@ -65,7 +65,7 @@ public class Utilities implements IUtilities {
 							getMnhatnCost(stateVal,downNeighbor)+
 									getMnhatnCost(downNeighbor,goalState):
 							getEucCost(stateVal,downNeighbor)+getEucCost(downNeighbor,goalState);
-					neighbors.add(new Entry(cost,downNeighbor));
+					neighbors.add(new Entry(cost,downNeighbor ));
 				}
 
 
@@ -74,7 +74,7 @@ public class Utilities implements IUtilities {
 							getMnhatnCost(stateVal,leftNeighbor)+
 									getMnhatnCost(leftNeighbor,goalState):
 							getEucCost(stateVal,leftNeighbor)+getEucCost(leftNeighbor,goalState);
-					neighbors.add(new Entry(cost,leftNeighbor));
+					neighbors.add(new Entry(cost,leftNeighbor ));
 				}
 
 
@@ -83,7 +83,7 @@ public class Utilities implements IUtilities {
 							getMnhatnCost(stateVal,upNeighbor)+
 									getMnhatnCost(upNeighbor,goalState):
 							getEucCost(stateVal,upNeighbor)+getEucCost(upNeighbor,goalState);
-					neighbors.add(new Entry(cost,upNeighbor));
+					neighbors.add(new Entry(cost,upNeighbor ));
 				}
 
 			}
@@ -173,7 +173,10 @@ public class Utilities implements IUtilities {
 		while (node != null) {
 			path.add(0, node.getItem());
 			node = node.getPrev();
+
 		}
+
+		System.out.println("");
 		return path;
 	}
 

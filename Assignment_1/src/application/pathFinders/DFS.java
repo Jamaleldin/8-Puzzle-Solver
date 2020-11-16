@@ -10,44 +10,50 @@ import application.pathFinders.utilities.Utilities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class DFS implements IPathFinder {
-	private ArrayList<int[]> visitedStates;
+	private Set<List<Integer>> visitedStates;
 	private Stack<INode> frontier;
 	private IUtilities utilities;
 	private int depth;
+	private int maxDepth;
 	private long time;
 	private int cost;
 
 	DFS() {
-		visitedStates = new ArrayList<int[]>();
+		visitedStates = new HashSet<List<Integer>>();
 		frontier = new Stack<INode>();
 		utilities = new Utilities();
 		depth = 0;
 		cost = 0;
+		maxDepth = 0;
 	}
 
 	@Override
-	public ArrayList<int[]> findPath(int[] initialState, String options) {
+	public ArrayList<List<Integer>> findPath(List<Integer> initialState, String options) {
 		time = new Date().getTime();
 		visitedStates.clear();
 		frontier.clear();
 		frontier.push(new Node(initialState));
 		while (!frontier.isEmpty()) {
 			INode state = frontier.pop();
-			depth =  ((Node) state).getDepth();
+			depth = ((Node) state).getDepth();
+			maxDepth = Math.max(depth, maxDepth);
 			visitedStates.add(state.getItem());
 
 			if (utilities.goalTest(state.getItem())) {
 				time = new Date().getTime() - time;
-				ArrayList<int[]> path = utilities.getPath(state);
+				ArrayList<List<Integer>> path = utilities.getPath(state);
 				cost = path.size();
 				return path;
 			}
 
-			ArrayList<int[]> neighbors = utilities.getNeighbors(state.getItem());
+			ArrayList<List<Integer>> neighbors = utilities.getNeighbors(state.getItem());
 
-			for (int[] neighbor : neighbors) {
+			for (List<Integer> neighbor : neighbors) {
 				boolean inFrontier = utilities.checkStateStack(neighbor, frontier);
 				boolean inVisited = utilities.checkStateVisited(neighbor, visitedStates);
 
@@ -77,7 +83,12 @@ public class DFS implements IPathFinder {
 	}
 
 	@Override
-	public ArrayList<int[]> nodesExpanded() {
+	public Set<List<Integer>> nodesExpanded() {
 		return visitedStates;
+	}
+
+	@Override
+	public int maxDepthReached() {
+		return maxDepth;
 	}
 }

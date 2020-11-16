@@ -1,5 +1,7 @@
 package application.pathFinders.interfaces;
 
+import java.util.List;
+
 public interface INode {
 	/**
 	 * set the previous node to the given node
@@ -21,6 +23,18 @@ public interface INode {
 	 * 
 	 * @return array of integers indicating to the state held by this node
 	 */
-	public int[] getItem();
+	public List<Integer> getItem();
+
+	/**
+	 * get the depth of the current node
+	 * 
+	 * @return integer that indicates the depth of the node
+	 */
+	public int getDepth();
+
+	/**
+	 * set the depth of the current node
+	 */
+	public void setDepth(int depth);
 
 }

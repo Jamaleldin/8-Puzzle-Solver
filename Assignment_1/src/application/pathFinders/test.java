@@ -18,7 +18,8 @@ public class test {
 			System.out.println("State " + (i + 1) + ": " + path.get(i));
 		}
 		System.out.println("");
-		System.out.println("No.Moves: " + pathFinder.CostOfPath() + " moves");
+		System.out.println("No. Moves: " + pathFinder.CostOfPath() + " moves");
+		System.out.println("No. Nodes Expanded: " + pathFinder.nodesExpanded().size());
 		System.out.println("Time: " + pathFinder.timeColapsed() + " milliseconds");
 		System.out.println("depth of goal: " + pathFinder.depthOfsearch());
 		System.out.println("Max depth reached: " + pathFinder.maxDepthReached());

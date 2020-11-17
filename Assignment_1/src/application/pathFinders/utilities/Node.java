@@ -1,31 +1,26 @@
 package application.pathFinders.utilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import application.pathFinders.interfaces.INode;
 
 public class Node implements INode {
-	private int[] arr;
+	private List<Integer> arr;
 	private INode prev;
 	private int depth;
 
-	public int getDepth() {
-		return depth;
-	}
-
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
-
 	public Node() {
-		arr = new int[9];
+		arr = new ArrayList<Integer>();
 		prev = null;
 	}
 
-	public Node(int[] state) {
+	public Node(List<Integer> state) {
 		arr = state;
 		prev = null;
 	}
 
-	public Node(int[] state, int depth) {
+	public Node(List<Integer> state, int depth) {
 		arr = state;
 		this.depth = depth;
 		prev = null;
@@ -42,8 +37,18 @@ public class Node implements INode {
 	}
 
 	@Override
-	public int[] getItem() {
+	public List<Integer> getItem() {
 		return arr;
+	}
+
+	@Override
+	public int getDepth() {
+		return depth;
+	}
+
+	@Override
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 
 }

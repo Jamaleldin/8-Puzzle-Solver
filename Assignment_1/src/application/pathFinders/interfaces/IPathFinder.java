@@ -1,6 +1,8 @@
 package application.pathFinders.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public interface IPathFinder {
 	/**
@@ -8,9 +10,12 @@ public interface IPathFinder {
 	 * 
 	 * @param initialState:
 	 *            array of index indicates the given puzzle
+	 * @param options:
+	 *            string to choose mnhatn or euclidean distance in A_Star search
+	 *            algorithm
 	 * @return an array list contains the shortest states from initial to goal
 	 */
-	public ArrayList<int[]> findPath(int[] initialState, String options);
+	public ArrayList<List<Integer>> findPath(List<Integer> initialState, String options);
 
 	/**
 	 * counting the number of moves done from initial state to the goal
@@ -35,9 +40,16 @@ public interface IPathFinder {
 	public int depthOfsearch();
 
 	/**
+	 * the maximum depth reached by the algorithm
+	 * 
+	 * @return integer that indicates the max depth ever visited by the search
+	 */
+	public int maxDepthReached();
+
+	/**
 	 * finds all nodes that the search technique has passed
 	 *
-	 * @return an array list contains all the visited nodes
+	 * @return Set contains all the visited nodes
 	 */
-	public ArrayList<int[]> nodesExpanded();
+	public Set<List<Integer>> nodesExpanded();
 }

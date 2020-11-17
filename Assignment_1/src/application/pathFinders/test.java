@@ -10,7 +10,7 @@ public class test {
 	public static void main(String[] args) {
 
 		IPathFinder pathFinder = new AStar();
-		List<Integer> initialState = Arrays.asList(5, 1, 2, 3, 4, 8, 6, 7, 0);
+		List<Integer> initialState = Arrays.asList(1, 8, 2, 0, 4, 3, 7, 6, 5);
 
 		ArrayList<List<Integer>> path = new ArrayList<>();
 		path = pathFinder.findPath(initialState, "mnhatn");

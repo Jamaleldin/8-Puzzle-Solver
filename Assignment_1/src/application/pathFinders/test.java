@@ -9,11 +9,11 @@ import application.pathFinders.interfaces.IPathFinder;
 public class test {
 	public static void main(String[] args) {
 
-		IPathFinder pathFinder = new BFS();
+		IPathFinder pathFinder = new AStar();
 		List<Integer> initialState = Arrays.asList(5, 1, 2, 3, 4, 8, 6, 7, 0);
 
 		ArrayList<List<Integer>> path = new ArrayList<>();
-		path = pathFinder.findPath(initialState, null);
+		path = pathFinder.findPath(initialState, "mnhatn");
 		for (int i = 0; i < path.size(); i++) {
 			System.out.println("State " + (i + 1) + ": " + path.get(i));
 		}

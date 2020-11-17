@@ -54,29 +54,29 @@ public class Utilities implements IUtilities {
 
 				if (!rightNeighbor.equals(stateVal)) {
 					int cost = options == "mnhatn"
-							? getMnhatnCost(stateVal, rightNeighbor) + getMnhatnCost(rightNeighbor, goalState)
-							: getEucCost(stateVal, rightNeighbor) + getEucCost(rightNeighbor, goalState);
+							? state.getDepth() + getMnhatnCost(rightNeighbor, goalState)
+							: state.getDepth() + getEucCost(rightNeighbor, goalState);
 					neighbors.add(new Entry(cost, rightNeighbor));
 				}
 
 				if (!downNeighbor.equals(stateVal)) {
 					int cost = options == "mnhatn"
-							? getMnhatnCost(stateVal, downNeighbor) + getMnhatnCost(downNeighbor, goalState)
-							: getEucCost(stateVal, downNeighbor) + getEucCost(downNeighbor, goalState);
+							? state.getDepth() + getMnhatnCost(downNeighbor, goalState)
+							: state.getDepth() + getEucCost(downNeighbor, goalState);
 					neighbors.add(new Entry(cost, downNeighbor));
 				}
 
 				if (!leftNeighbor.equals(stateVal)) {
 					int cost = options == "mnhatn"
-							? getMnhatnCost(stateVal, leftNeighbor) + getMnhatnCost(leftNeighbor, goalState)
-							: getEucCost(stateVal, leftNeighbor) + getEucCost(leftNeighbor, goalState);
+							? state.getDepth() + getMnhatnCost(leftNeighbor, goalState)
+							: state.getDepth() + getEucCost(leftNeighbor, goalState);
 					neighbors.add(new Entry(cost, leftNeighbor));
 				}
 
 				if (!upNeighbor.equals(stateVal)) {
 					int cost = options == "mnhatn"
-							? getMnhatnCost(stateVal, upNeighbor) + getMnhatnCost(upNeighbor, goalState)
-							: getEucCost(stateVal, upNeighbor) + getEucCost(upNeighbor, goalState);
+							? state.getDepth() + getMnhatnCost(upNeighbor, goalState)
+							: state.getDepth() + getEucCost(upNeighbor, goalState);
 					neighbors.add(new Entry(cost, upNeighbor));
 				}
 

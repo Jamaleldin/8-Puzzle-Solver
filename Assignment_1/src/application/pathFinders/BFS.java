@@ -50,7 +50,7 @@ public class BFS implements IPathFinder {
 				// that's it
 				time = new Date().getTime() - time;
 				ArrayList<List<Integer>> path = utilities.getPath(state);
-				cost = path.size();
+				cost = path.size() - 1;
 				return path;
 			}
 

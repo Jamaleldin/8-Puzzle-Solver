@@ -54,7 +54,7 @@ public class AStar implements IPathFinder {
 			if (utilities.goalTest(state.getItem())) {
 				time = new Date().getTime() - time;
 				ArrayList<List<Integer>> path = utilities.getPath(state);
-				cost = path.size();
+				cost = path.size() - 1;
 				return path;
 			}
 
@@ -68,8 +68,8 @@ public class AStar implements IPathFinder {
 					neighbor.setDepth(depth++);
 					neighbor.setPrev(state);
 					frontier.add(neighbor);
-				}else if(inFrontier){
-					int reducedCost = min(utilities.getKey(neighbor.getItem(),frontier),neighbor.getKey());
+				} else if (inFrontier) {
+					int reducedCost = min(utilities.getKey(neighbor.getItem(), frontier), neighbor.getKey());
 					neighbor.setKey(reducedCost);
 				}
 			}

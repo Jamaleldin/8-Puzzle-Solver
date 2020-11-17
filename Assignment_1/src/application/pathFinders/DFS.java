@@ -47,7 +47,7 @@ public class DFS implements IPathFinder {
 			if (utilities.goalTest(state.getItem())) {
 				time = new Date().getTime() - time;
 				ArrayList<List<Integer>> path = utilities.getPath(state);
-				cost = path.size();
+				cost = path.size() - 1;
 				return path;
 			}
 

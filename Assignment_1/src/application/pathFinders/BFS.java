@@ -57,13 +57,13 @@ public class BFS implements IPathFinder {
 			ArrayList<List<Integer>> neighbors = utilities.getNeighbors(state.getItem());
 
 			for (List<Integer> neighbor : neighbors) {
-				boolean inFrontier = utilities.checkStateQueue(neighbor, frontier);
 				boolean inVisited = utilities.checkStateVisited(neighbor, visitedStates);
 
-				if (!inFrontier && !inVisited) {
+				if (!inVisited) {
 					INode nextNeighbor = new Node(neighbor, depth + 1);
 					nextNeighbor.setPrev(state);
 					frontier.add(nextNeighbor);
+					visitedStates.add(neighbor);
 				}
 			}
 

@@ -45,27 +45,28 @@ public class AStar implements IPathFinder {
 
 		while (!frontier.isEmpty()) {
 			Entry state = frontier.poll();
-			visitedStates.add(state.getItem());
-			depth = state.getDepth();
-			maxDepth = Math.max(depth, maxDepth);
+			if (!utilities.checkStateVisited(state.getItem(), visitedStates)) {
+				visitedStates.add(state.getItem());
+				depth = state.getDepth();
+				maxDepth = Math.max(depth, maxDepth);
 
-			if (utilities.goalTest(state.getItem())) {
-				time = new Date().getTime() - time;
-				ArrayList<List<Integer>> path = utilities.getPath(state);
-				cost = path.size();
-				return path;
-			}
+				if (utilities.goalTest(state.getItem())) {
+					time = new Date().getTime() - time;
+					ArrayList<List<Integer>> path = utilities.getPath(state);
+					cost = path.size();
+					return path;
+				}
 
-			ArrayList<Entry> neighbors = utilities.getNeighbors(state, options);
+				ArrayList<Entry> neighbors = utilities.getNeighbors(state, options);
 
-			for (Entry neighbor : neighbors) {
-				boolean inFrontier = utilities.checkStatePQ(neighbor.getItem(), frontier);
-				boolean inVisited = utilities.checkStateVisited(neighbor.getItem(), visitedStates);
+				for (Entry neighbor : neighbors) {
+					boolean inVisited = utilities.checkStateVisited(neighbor.getItem(), visitedStates);
 
-				if (!inFrontier && !inVisited) {
-					neighbor.setDepth(depth++);
-					neighbor.setPrev(state);
-					frontier.add(neighbor);
+					if (!inVisited) {
+						neighbor.setDepth(depth++);
+						neighbor.setPrev(state);
+						frontier.add(neighbor);
+					}
 				}
 			}
 		}

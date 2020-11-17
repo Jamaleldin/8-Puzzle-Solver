@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
+import static java.lang.Math.min;
+
 public class AStar implements IPathFinder {
 	private final Set<List<Integer>> visitedStates;
 	private final PriorityQueue<Entry> frontier;
@@ -66,6 +68,9 @@ public class AStar implements IPathFinder {
 					neighbor.setDepth(depth++);
 					neighbor.setPrev(state);
 					frontier.add(neighbor);
+				}else if(inFrontier){
+					int reducedCost = min(utilities.getKey(neighbor.getItem(),frontier),neighbor.getKey());
+					neighbor.setKey(reducedCost);
 				}
 			}
 		}

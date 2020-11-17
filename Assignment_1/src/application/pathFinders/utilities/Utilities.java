@@ -138,6 +138,16 @@ public class Utilities implements IUtilities {
 	}
 
 	@Override
+	public int getKey(List<Integer> neighbor, PriorityQueue<Entry> frontier) {
+		for (Entry arr : frontier) {
+			if (neighbor.equals(arr.getItem())) {
+				return arr.getKey();
+			}
+		}
+		return 0;
+	}
+
+	@Override
 	public boolean checkStateQueue(List<Integer> neighbor, Queue<INode> frontier) {
 		for (INode arr : frontier) {
 			if (neighbor.equals(arr.getItem())) {

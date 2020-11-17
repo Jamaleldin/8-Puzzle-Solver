@@ -43,6 +43,10 @@ public class Entry implements Comparable<Entry>, INode {
 		return key;
 	}
 
+	public void setKey(int key) {
+		this.key = key;
+	}
+
 	@Override
 	public void setPrev(INode node) {
 		prev = node;

@@ -124,4 +124,6 @@ public interface IUtilities {
 	 */
 	public int getEucCost(List<Integer> current, List<Integer> goal);
 
+
+	public int getKey(List<Integer> neighbor, PriorityQueue<Entry> frontier);
 }

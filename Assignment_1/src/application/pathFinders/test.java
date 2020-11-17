@@ -23,5 +23,7 @@ public class test {
 		System.out.println("Time: " + pathFinder.timeColapsed() + " milliseconds");
 		System.out.println("depth of goal: " + pathFinder.depthOfsearch());
 		System.out.println("Max depth reached: " + pathFinder.maxDepthReached());
+
+
 	}
 }
